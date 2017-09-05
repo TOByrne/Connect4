@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C4Interfaces", "C4Interfaces\C4Interfaces.csproj", "{A2CCF334-3D9D-46CE-8A41-FD7BA32DB565}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C4Mediator", "C4Mediator\C4Mediator.csproj", "{5CC374E5-0910-4CBF-8CDE-90DA913217AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connect4", "Connect4\Connect4.csproj", "{3AFFF32E-57AF-4FBB-BA23-50435E345E94}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2CCF334-3D9D-46CE-8A41-FD7BA32DB565}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2CCF334-3D9D-46CE-8A41-FD7BA32DB565}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2CCF334-3D9D-46CE-8A41-FD7BA32DB565}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2CCF334-3D9D-46CE-8A41-FD7BA32DB565}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CC374E5-0910-4CBF-8CDE-90DA913217AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CC374E5-0910-4CBF-8CDE-90DA913217AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CC374E5-0910-4CBF-8CDE-90DA913217AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CC374E5-0910-4CBF-8CDE-90DA913217AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AFFF32E-57AF-4FBB-BA23-50435E345E94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AFFF32E-57AF-4FBB-BA23-50435E345E94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AFFF32E-57AF-4FBB-BA23-50435E345E94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AFFF32E-57AF-4FBB-BA23-50435E345E94}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

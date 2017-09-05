@@ -1,0 +1,36 @@
+﻿Rules of play
+	Arbitrary Grid Size (rows/columns => 2 x 3)
+	Winning Condition = 4 consecutive for any grid size
+
+Rules of code
+	No pre-programmed strategies
+	No AI libraries first pass
+	AI libraries second pass
+
+Interfaces
+
+	IPlayer{
+		IBoard PlayMove(IBoard, Square.SquareValue);
+		//	Second pass includes time constraints
+	}
+
+	IBoard{
+		Width
+		Height
+
+		Dictionary<ICell, Square.SquareValue>
+
+		//	Proposing this instead of the Dictionary
+		ICell[,] State
+	}
+
+	ICell{
+		int x
+		int y
+	}
+
+	Host/Mediator verifies state of the board
+	Second pass Mediator enforces time constraints
+
+Extra Credit
+	Most efficient algorithm
