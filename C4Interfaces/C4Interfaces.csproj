@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBoard.cs" />
-    <Compile Include="ICell.cs" />
+    <Compile Include="Cell.cs" />
     <Compile Include="IPlayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
