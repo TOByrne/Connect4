@@ -52,6 +52,20 @@
   <ItemGroup>
     <Content Include="Rules.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\C4Interfaces\C4Interfaces.csproj">
+      <Project>{A2CCF334-3D9D-46CE-8A41-FD7BA32DB565}</Project>
+      <Name>C4Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\C4Mediator\C4Mediator.csproj">
+      <Project>{5CC374E5-0910-4CBF-8CDE-90DA913217AB}</Project>
+      <Name>C4Mediator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExamplePlayer.Person\Example.Person.csproj">
+      <Project>{E4D6EF08-F269-4580-A022-C23398891E79}</Project>
+      <Name>Example.Person</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

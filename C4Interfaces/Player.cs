@@ -4,13 +4,18 @@ namespace C4Interfaces
 {
 	public abstract class Player
 	{
+		public Color Color { get; private set; }
+
 		/// <summary>
 		/// Initialize the player with some information about the game to play
 		/// </summary>
 		/// <param name="playerColor">The color the player is going to play with.</param>
 		/// <param name="totalTimeInSecs">Total game time the player has to play. A player loses if they use more time than this.</param>
 		/// <param name="machineCores">How many logical cores the machine running the game has.</param>
-		public Player(Color playerColor, int totalTimeInSecs, int machineCores) { }
+		public Player(Color playerColor, int totalTimeInSecs, int machineCores)
+		{
+			Color = playerColor;
+		}
 
 		/// <summary>
 		/// Calculate this player's next move.

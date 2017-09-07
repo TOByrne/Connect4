@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A2CCF334-3D9D-46CE-8A41-FD7BA32DB565}</ProjectGuid>
+    <ProjectGuid>{E4D6EF08-F269-4580-A022-C23398891E79}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>C4Interfaces</RootNamespace>
-    <AssemblyName>C4Interfaces</AssemblyName>
+    <RootNamespace>ExamplePlayer.Person</RootNamespace>
+    <AssemblyName>ExamplePlayer.Person</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,10 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Color.cs" />
-    <Compile Include="Cell.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="ExamplePlayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\C4Interfaces\C4Interfaces.csproj">
+      <Project>{A2CCF334-3D9D-46CE-8A41-FD7BA32DB565}</Project>
+      <Name>C4Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
