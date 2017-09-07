@@ -9,6 +9,8 @@ namespace Example.Person
 {
 	public class ExamplePlayer : Player
 	{
+		public override string Name => "Example Player";
+
 		public ExamplePlayer(Color playerColor, int totalTimeInSecs, int machineCores)
 			: base(playerColor, totalTimeInSecs, machineCores)
 		{

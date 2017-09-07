@@ -5,6 +5,7 @@ namespace C4Interfaces
 	public abstract class Player
 	{
 		public Color Color { get; private set; }
+		public abstract string Name { get; }
 
 		/// <summary>
 		/// Initialize the player with some information about the game to play

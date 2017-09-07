@@ -105,7 +105,17 @@ namespace C4Mediator
 		{
 			Console.ForegroundColor = ConsoleColor.White;
 			Console.SetCursorPosition(0, 0);
-			Console.WriteLine("Drawing the board...");
+
+			var player1Name = Players[0].Name;
+			var player2Name = Players[1].Name;
+
+			Console.ForegroundColor = ConsoleColor.Red;
+			Console.SetCursorPosition(0, 0);
+			Console.Write(player1Name);
+
+			Console.ForegroundColor = ConsoleColor.Yellow;
+			Console.SetCursorPosition(10 + player1Name.Length, 0);
+			Console.Write(player2Name);
 
 			foreach (var key in BoardState.Keys)
 			{
@@ -117,7 +127,7 @@ namespace C4Mediator
 
 		private void DrawCell(Cell key)
 		{
-			Console.SetCursorPosition(5 + key.X*3, 15 - key.Y*2);
+			Console.SetCursorPosition(5 + key.X*3, 17 - key.Y*2);
 			Console.ForegroundColor = BoardState[key] == Color.Red ? ConsoleColor.Red : ConsoleColor.Yellow;
 
 			Console.Write('\u2588');
