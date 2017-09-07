@@ -21,7 +21,7 @@ namespace C4Interfaces
 		/// <summary>
 		/// Calculate this player's next move.
 		/// </summary>
-		/// <param name="board">The collection of cells used so far. A cell is empty if it's not on the board collection.</param>
+		/// <param name="board">The collection of cells used so far. (1,1) is at the bottom/left. A cell is empty if it's not on the board collection.</param>
 		/// <returns>The column the player wants to play in.</returns>
 		public abstract int ColumnToPlay(Dictionary<Cell, Color> board);
 	}
