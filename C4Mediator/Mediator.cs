@@ -52,7 +52,7 @@ namespace C4Mediator
 
 				PlayMove(playerMove, currentPlayer.Color);
 
-				Thread.Sleep(200);
+				Thread.Sleep(10);
 				DrawBoard();
 
 				currentPlayer = currentPlayer == Players[0] ? Players[1] : Players[0];
@@ -98,10 +98,112 @@ namespace C4Mediator
 
 			var numCellsPlayed = BoardState.Keys.Count;
 
-			return numCellsPlayed >= (BOARD_WIDTH*BOARD_HEIGHT);
+			if( numCellsPlayed >= (BOARD_WIDTH*BOARD_HEIGHT)) return true;
+            for(var x = 1; x <= 7; x++)
+            {
+                for (var y = 1; y <= 6; y++)
+                {
+                    var cell = new Cell { X = x, Y = y };
+                    if ( CheckDiagonalUpWin(cell) || CheckDiagonalDownWin(cell) || CheckHorizontalWin(cell) || CheckVerticalWin(cell))
+                    {
+                        var pX = Console.CursorLeft;
+                        var pY = Console.CursorTop;
+                        Console.SetCursorPosition(1, 19);
+                        Console.Write(Enum.GetName(typeof(Color), BoardState[cell]) + " wins");
+                        Console.SetCursorPosition(pX, pY);
+                        return true;
+                    }
+                        
+                }
+            }
+            return false;
 		}
 
-		public string DrawBoard()
+        private bool CheckHorizontalWin(Cell cell)
+        {
+            if (!BoardState.ContainsKey(cell)) return false;
+            var color = BoardState[cell];
+            var count = 1;
+            for (var x = cell.X + 1; x <= 7; x++)
+            {
+                var next = new Cell { X = x, Y = cell.Y };
+                if (BoardState.ContainsKey(next) && BoardState[next] == color)
+                {
+                    count++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return count >= 4;
+        }
+
+        private bool CheckVerticalWin(Cell cell)
+        {
+            if (!BoardState.ContainsKey(cell)) return false;
+            var color = BoardState[cell];
+            var count = 1;
+            for (var y = cell.Y + 1; y <= 6; y++)
+            {
+                var next = new Cell { X = cell.X, Y = y };
+                if (BoardState.ContainsKey(next) && BoardState[next] == color)
+                {
+                    count++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return count >= 4;
+        }
+
+        private bool CheckDiagonalUpWin(Cell cell)
+        {
+            if (!BoardState.ContainsKey(cell)) return false;
+            var color = BoardState[cell];
+            var count = 1;
+            var y = cell.Y + 1;
+            for (var x = cell.X + 1; x <= 7; x++)
+            {
+                var next = new Cell { X = x, Y = y };
+                if (BoardState.ContainsKey(next) && BoardState[next] == color)
+                {
+                    count++;
+                }
+                else
+                {
+                    break;
+                }
+                y++;
+            }
+            return count >= 4;
+        }
+
+        private bool CheckDiagonalDownWin(Cell cell)
+        {
+            if (!BoardState.ContainsKey(cell)) return false;
+            var color = BoardState[cell];
+            var count = 1;
+            var y = cell.Y - 1;
+            for (var x = cell.X + 1; x <= 7; x++)
+            {
+                var next = new Cell { X = x, Y = y };
+                if (BoardState.ContainsKey(next) && BoardState[next] == color)
+                {
+                    count++;
+                }
+                else
+                {
+                    break;
+                }
+                y--;
+            }
+            return count >= 4;
+        }
+
+        public string DrawBoard()
 		{
 			Console.ForegroundColor = ConsoleColor.White;
 			Console.SetCursorPosition(0, 0);

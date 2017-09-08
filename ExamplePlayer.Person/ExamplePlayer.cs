@@ -23,7 +23,7 @@ namespace Example.Person
 
 			var availableColumns = new List<int>();
 
-			for (var x = 0; x < 7; x++)
+			for (var x = 1; x <= 7; x++)
 			{
 				int highestPopulatedCellInColumn = 0;
 
