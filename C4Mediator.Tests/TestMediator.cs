@@ -23,9 +23,9 @@ namespace C4Mediator.Tests
 
 		public static void Draw(Dictionary<Cell, Color> state)
 		{
-			for (int y = BOARD_HEIGHT - 1; y >= 0; y--)
+			for (int y = BOARD_HEIGHT; y > 0; y--)
 			{
-				for (int x = 0; x < BOARD_WIDTH; x++)
+				for (int x = 1; x <= BOARD_WIDTH; x++)
 				{
 					var cell = new Cell { X = x, Y = y };
 					if (state.ContainsKey(cell))
