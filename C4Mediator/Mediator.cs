@@ -339,5 +339,18 @@ namespace C4Mediator
 				highestPopulatedCellInColumn = column.Max(c => c.Y);
 			return highestPopulatedCellInColumn;
 		}
+
+		private Dictionary<Cell, Color> CopyBoard(Dictionary<Cell, Color> board)
+		{
+			var copy = new Dictionary<Cell, Color>();
+
+			foreach (var cell in board.Keys)
+			{
+				copy[cell] = board[cell];
+			}
+
+			return copy;
+		}
+
 	}
 }
