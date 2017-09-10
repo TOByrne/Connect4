@@ -49,17 +49,18 @@ namespace C4Mediator
 			{
 				int playerMove;
 
+				var copiedBoard = CopyBoard(BoardState);
 				if (ALLOW_RETRIES)
 				{
 					do
 					{
-						playerMove = currentPlayer.ColumnToPlay(BoardState);
+						playerMove = currentPlayer.ColumnToPlay(copiedBoard);
 
 					} while (!IsLegalMove(playerMove));
 				}
 				else
 				{
-					playerMove = currentPlayer.ColumnToPlay(BoardState);
+					playerMove = currentPlayer.ColumnToPlay(copiedBoard);
 
 					if (!IsLegalMove(playerMove))
 					{
