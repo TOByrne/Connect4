@@ -8,11 +8,15 @@ namespace C4Mediator
 {
 	public class Mediator
 	{
+		const bool ALLOW_RETRIES = false;
+
 		public const int BOARD_HEIGHT = 6;
 		public const int BOARD_WIDTH = 7;
 
 		private Dictionary<Cell, Color> BoardState { get; set; }
 		private List<Player> Players { get; set; }
+		private Color? Winner { get; set; }
+		private string WinMessage { get; set; }
 
 		public Mediator()
 		{
@@ -37,42 +41,68 @@ namespace C4Mediator
 				return;
 			}
 
-			Player currentPlayer = Players[0];
+			var currentPlayer = Players[0];
+			var otherPlayer = Players[1];
 
 			var winningMove = false;
-			while (!GameOver() && !winningMove)
+			while (!GameOver() && !winningMove && Winner == null)
 			{
 				int playerMove;
-				do
+
+				if (ALLOW_RETRIES)
+				{
+					do
+					{
+						playerMove = currentPlayer.ColumnToPlay(BoardState);
+
+					} while (!IsLegalMove(playerMove));
+				}
+				else
 				{
 					playerMove = currentPlayer.ColumnToPlay(BoardState);
 
-				} while (!IsLegalMove(playerMove));
-
-				var move = ApplyMove(playerMove, currentPlayer.Color);
-
-				Thread.Sleep(10);
-				DrawBoard();
-				winningMove = IsWinningMove(move);
-
-				if (winningMove)
-				{
-					var pX = Console.CursorLeft;
-					var pY = Console.CursorTop;
-					Console.SetCursorPosition(1, 19);
-					Console.Write(Enum.GetName(typeof(Color), BoardState[move]) + " wins");
-					Console.SetCursorPosition(pX, pY);
-					return;
+					if (!IsLegalMove(playerMove))
+					{
+						Winner = otherPlayer.Color;
+						WinMessage = $"{currentPlayer.Color} made an illegal move. {Winner} wins.";
+						ApplyMove(playerMove, currentPlayer.Color);
+						DrawBoard();
+					}
 				}
 
-				Thread.Sleep(1);
+				if (Winner == null)
+				{
+					var move = ApplyMove(playerMove, currentPlayer.Color);
 
-				currentPlayer = currentPlayer == Players[0] ? Players[1] : Players[0];
+					Thread.Sleep(10);
+					DrawBoard();
+					winningMove = IsWinningMove(move);
+
+					if (winningMove)
+					{
+						var pX = Console.CursorLeft;
+						var pY = Console.CursorTop;
+						Console.SetCursorPosition(1, 19);
+						WinMessage = Enum.GetName(typeof (Color), BoardState[move]) + " wins";
+						Console.SetCursorPosition(pX, pY);
+					}
+
+					Thread.Sleep(1);
+
+					currentPlayer = currentPlayer == Players[0] ? Players[1] : Players[0];
+					otherPlayer = currentPlayer == Players[0] ? Players[1] : Players[0];
+				}
 			}
 
 			Console.ForegroundColor = ConsoleColor.White;
 			Console.SetCursorPosition(1, 19);
-			Console.Write("It's a tie!");
+
+			if (GameOver() && !winningMove)
+			{
+				WinMessage = "It's a tie!";
+			}
+
+			Console.Write(WinMessage);
 		}
 
 		private Cell ApplyMove(int playerMove, Color playerColor)
@@ -97,7 +127,11 @@ namespace C4Mediator
 		private bool IsLegalMove(int playerMove)
 		{
 			//	The player's move is a column into which they drop their stone.
-			//	It's a legal move if there's a cell available within that column.
+			//	It's a legal move if there's a cell available within that column
+			//	and if that move is an actual column between 1 and 7 (inclusive)
+
+			if (playerMove < 1 || playerMove > BOARD_WIDTH) return false;
+
 			int highestPopulatedCellInColumn = 0;
 
 			if (BoardState.Keys.Count > 0)
