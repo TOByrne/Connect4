@@ -15,20 +15,20 @@ namespace Connect4
 		{
 
 
-            while(true)
-            {
-                Console.Clear();
-                var mediator = new Mediator();
+			while (true)
+			{
+				Console.Clear();
+				var mediator = new Mediator();
 
-                var player1 = new ExamplePlayer(Color.Red, 600, 1);
-                var player2 = new ExamplePlayer(Color.Yellow, 600, 1);
+				var player1 = new ExamplePlayer(Color.Red, 600, 1);
+				var player2 = new ExamplePlayer(Color.Yellow, 600, 1);
 
-                mediator.AddPlayer(player1);
-                mediator.AddPlayer(player2);
-                mediator.StartGame();
-                Console.ReadLine();
-            }
-			
+				mediator.AddPlayer(player1);
+				mediator.AddPlayer(player2);
+				mediator.StartGame();
+				Console.ReadLine();
+			}
+
 		}
 	}
 }
