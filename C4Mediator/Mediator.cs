@@ -84,7 +84,7 @@ namespace C4Mediator
 						var pX = Console.CursorLeft;
 						var pY = Console.CursorTop;
 						Console.SetCursorPosition(1, 19);
-						WinMessage = Enum.GetName(typeof (Color), BoardState[move]) + " wins";
+						WinMessage = $"{BoardState[move]} ({currentPlayer.Name}) wins";
 						Console.SetCursorPosition(pX, pY);
 					}
 
