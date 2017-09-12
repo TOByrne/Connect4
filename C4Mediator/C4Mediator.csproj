@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Mediator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Referee.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\C4Interfaces\C4Interfaces.csproj">

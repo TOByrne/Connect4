@@ -46,10 +46,10 @@ namespace C4Mediator.Tests
 			//	Sending different Cells for it to test against forces the verification to assume
 			//	that particular last move.  So rather than just checking from one end to the other,
 			//	it takes the move played and looks to the left and then to the right (if necessary)
-			TestMediator.Horizontal(boardState, Cell(1, 1));
-			TestMediator.Horizontal(boardState, Cell(2, 1));
-			TestMediator.Horizontal(boardState, Cell(3, 1));
-			TestMediator.Horizontal(boardState, Cell(4, 1));
+			TestReferee.Horizontal(boardState, Cell(1, 1));
+			TestReferee.Horizontal(boardState, Cell(2, 1));
+			TestReferee.Horizontal(boardState, Cell(3, 1));
+			TestReferee.Horizontal(boardState, Cell(4, 1));
 		}
 
 		[Test]
@@ -66,10 +66,10 @@ namespace C4Mediator.Tests
 			boardState[Cell(2, 2)] = Color.Yellow;
 			boardState[Cell(2, 3)] = Color.Yellow;
 
-			TestMediator.Horizontal(boardState, Cell(1, 1));
-			TestMediator.Horizontal(boardState, Cell(1, 2));
-			TestMediator.Horizontal(boardState, Cell(1, 3));
-			TestMediator.Horizontal(boardState, Cell(1, 4));
+			TestReferee.Horizontal(boardState, Cell(1, 1));
+			TestReferee.Horizontal(boardState, Cell(1, 2));
+			TestReferee.Horizontal(boardState, Cell(1, 3));
+			TestReferee.Horizontal(boardState, Cell(1, 4));
 		}
 
 		private void Diagonal1()
@@ -88,12 +88,12 @@ namespace C4Mediator.Tests
 			boardState.Add(Cell(3, 2), Color.Red);
 			boardState.Add(Cell(4, 1), Color.Red);
 
-			TestMediator.Draw(boardState);
+			TestReferee.Draw(boardState);
 
-			Assert.True(TestMediator.Diagonal(boardState, Cell(1, 4)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(2, 3)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(3, 2)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(4, 1)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(1, 4)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(2, 3)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(3, 2)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(4, 1)));
 		}
 
 		private void Diagonal2()
@@ -112,12 +112,12 @@ namespace C4Mediator.Tests
 			boardState.Add(Cell(5, 2), Color.Red);
 			boardState.Add(Cell(4, 1), Color.Red);
 
-			TestMediator.Draw(boardState);
+			TestReferee.Draw(boardState);
 
-			Assert.True(TestMediator.Diagonal(boardState, Cell(7, 4)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(6, 3)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(5, 2)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(4, 1)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(7, 4)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(6, 3)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(5, 2)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(4, 1)));
 		}
 
 		private void Diagonal3()
@@ -136,12 +136,12 @@ namespace C4Mediator.Tests
 			boardState.Add(Cell(6, 2), Color.Red);
 			boardState.Add(Cell(7, 1), Color.Red);
 
-			TestMediator.Draw(boardState);
+			TestReferee.Draw(boardState);
 
-			Assert.True(TestMediator.Diagonal(boardState, Cell(4, 4)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(5, 3)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(6, 2)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(7, 1)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(4, 4)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(5, 3)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(6, 2)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(7, 1)));
 		}
 
 		private void Diagonal4()
@@ -160,12 +160,12 @@ namespace C4Mediator.Tests
 			boardState.Add(Cell(3, 3), Color.Red);
 			boardState.Add(Cell(4, 4), Color.Red);
 
-			TestMediator.Draw(boardState);
+			TestReferee.Draw(boardState);
 
-			Assert.True(TestMediator.Diagonal(boardState, Cell(1, 1)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(2, 2)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(3, 3)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(4, 4)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(1, 1)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(2, 2)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(3, 3)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(4, 4)));
 		}
 
 		private void Diagonal5()
@@ -184,12 +184,12 @@ namespace C4Mediator.Tests
 			boardState.Add(Cell(3, 4), Color.Red);
 			boardState.Add(Cell(4, 3), Color.Red);
 
-			TestMediator.Draw(boardState);
+			TestReferee.Draw(boardState);
 
-			Assert.True(TestMediator.Diagonal(boardState, Cell(1, 6)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(2, 5)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(3, 4)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(4, 3)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(1, 6)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(2, 5)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(3, 4)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(4, 3)));
 		}
 
 		private void Diagonal6()
@@ -208,12 +208,12 @@ namespace C4Mediator.Tests
 			boardState.Add(Cell(5, 4), Color.Red);
 			boardState.Add(Cell(4, 3), Color.Red);
 
-			TestMediator.Draw(boardState);
+			TestReferee.Draw(boardState);
 
-			Assert.True(TestMediator.Diagonal(boardState, Cell(7, 6)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(6, 5)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(5, 4)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(4, 3)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(7, 6)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(6, 5)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(5, 4)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(4, 3)));
 		}
 
 		private void Diagonal7()
@@ -232,12 +232,12 @@ namespace C4Mediator.Tests
 			boardState.Add(Cell(6, 4), Color.Red);
 			boardState.Add(Cell(7, 3), Color.Red);
 
-			TestMediator.Draw(boardState);
+			TestReferee.Draw(boardState);
 
-			Assert.True(TestMediator.Diagonal(boardState, Cell(4, 6)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(5, 5)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(6, 4)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(7, 3)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(4, 6)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(5, 5)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(6, 4)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(7, 3)));
 		}
 
 		private void Diagonal8()
@@ -256,12 +256,12 @@ namespace C4Mediator.Tests
 			boardState.Add(Cell(3, 5), Color.Red);
 			boardState.Add(Cell(4, 6), Color.Red);
 
-			TestMediator.Draw(boardState);
+			TestReferee.Draw(boardState);
 
-			Assert.True(TestMediator.Diagonal(boardState, Cell(1, 3)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(2, 4)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(3, 5)));
-			Assert.True(TestMediator.Diagonal(boardState, Cell(4, 6)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(1, 3)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(2, 4)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(3, 5)));
+			Assert.True(TestReferee.Diagonal(boardState, Cell(4, 6)));
 		}
 	}
 }

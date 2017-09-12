@@ -8,11 +8,6 @@ namespace C4Mediator
 {
 	public class Mediator
 	{
-		const bool ALLOW_RETRIES = false;
-
-		public const int BOARD_HEIGHT = 6;
-		public const int BOARD_WIDTH = 7;
-
 		private Dictionary<Cell, Color> BoardState { get; set; }
 		private List<Player> Players { get; set; }
 		private Color? Winner { get; set; }
@@ -45,12 +40,12 @@ namespace C4Mediator
 			var otherPlayer = Players[1];
 
 			var winningMove = false;
-			while (!GameOver() && !winningMove && Winner == null)
+			while (!Referee.GameOver(BoardState) && !winningMove && Winner == null)
 			{
 				int playerMove;
 
 				var copiedBoard = CopyBoard(BoardState);
-				if (ALLOW_RETRIES)
+				if (Constants.ALLOW_RETRIES)
 				{
 					do
 					{
@@ -77,7 +72,7 @@ namespace C4Mediator
 
 					Thread.Sleep(10);
 					DrawBoard();
-					winningMove = IsWinningMove(move);
+					winningMove = Referee.IsWinningMove(BoardState, move);
 
 					if (winningMove)
 					{
@@ -98,7 +93,7 @@ namespace C4Mediator
 			Console.ForegroundColor = ConsoleColor.White;
 			Console.SetCursorPosition(1, 19);
 
-			if (GameOver() && !winningMove)
+			if (Referee.GameOver(BoardState) && !winningMove)
 			{
 				WinMessage = "It's a tie!";
 			}
@@ -131,7 +126,7 @@ namespace C4Mediator
 			//	It's a legal move if there's a cell available within that column
 			//	and if that move is an actual column between 1 and 7 (inclusive)
 
-			if (playerMove < 1 || playerMove > BOARD_WIDTH) return false;
+			if (playerMove < 1 || playerMove > Constants.BOARD_WIDTH) return false;
 
 			int highestPopulatedCellInColumn = 0;
 
@@ -140,158 +135,7 @@ namespace C4Mediator
 				highestPopulatedCellInColumn = HighestPopulatedCellInColumn(playerMove);
 			}
 
-			return highestPopulatedCellInColumn < BOARD_HEIGHT;
-		}
-
-		private bool IsWinningMove(Cell move)
-		{
-			return CheckVerticalWin(BoardState, move) || CheckHorizontalWin(BoardState, move) || CheckDiagonalWin(BoardState, move);
-		}
-
-		protected static bool CheckVerticalWin(Dictionary<Cell, Color> BoardState, Cell move)
-		{
-			if (move.Y < 4) return false;
-			var numConnected = 1;
-			var moveColor = BoardState[move];
-
-			for (var y = move.Y; y >= 1 && numConnected <= 4; y--)
-			{
-				var tempCell = new Cell { X = move.X, Y = y };
-
-				if (BoardState[tempCell] == moveColor)
-				{
-					numConnected++;
-				}
-				else
-				{
-					return false;
-				}
-			}
-
-			return true;
-		}
-
-		protected static bool CheckHorizontalWin(Dictionary<Cell, Color> BoardState, Cell move)
-		{
-			var numConnected = 1;
-			var moveColor = BoardState[move];
-
-			//	If enough moves have been played
-			if (BoardState.Keys.Count > 6)
-			{
-				//	look to the move's left...
-				for (var x = move.X - 1; x >= 1 && numConnected <= 4; x--)
-				{
-					var tempCell = new Cell { X = x, Y = move.Y };
-
-					if (BoardState.ContainsKey(tempCell) && BoardState[tempCell] == moveColor)
-					{
-						numConnected++;
-					}
-					else break;
-				}
-
-				//	look to the move's right...
-				for (var x = move.X + 1; x <= BOARD_WIDTH && numConnected <= 4; x++)
-				{
-					var tempCell = new Cell { X = x, Y = move.Y };
-
-					if (BoardState.ContainsKey(tempCell) && BoardState[tempCell] == moveColor)
-					{
-						numConnected++;
-					}
-					else break;
-				}
-			}
-			return numConnected >= 4;
-		}
-
-		protected static bool CheckDiagonalWin(Dictionary<Cell, Color> BoardState, Cell move)
-		{
-			var numConnected = 1;
-			var moveColor = BoardState[move];
-
-
-			//	If enough moves have been played
-			if (BoardState.Keys.Count > 9)
-			{
-				//	Check down and to the left
-				for (int x = move.X - 1, y = move.Y - 1; x >= 1 && y >= 1 && numConnected <= 4; x--, y--)
-				{
-					var tempCell = new Cell { X = x, Y = y };
-
-					if (BoardState.ContainsKey(tempCell) && BoardState[tempCell] == moveColor)
-					{
-						numConnected++;
-					}
-					else break;
-				}
-
-				//	Then up and to the right
-				for (int x = move.X + 1, y = move.Y + 1; x <= BOARD_WIDTH && y <= BOARD_HEIGHT && numConnected <= 4; x++, y++)
-				{
-					var tempCell = new Cell { X = x, Y = y };
-
-					if (BoardState.ContainsKey(tempCell) && BoardState[tempCell] == moveColor)
-					{
-						numConnected++;
-					}
-					else break;
-				}
-
-				//	If those don't have a win,
-				if (numConnected < 4)
-				{
-					//	We're checking in a different direction, so reset the connected counter
-					numConnected = 1;
-
-					//	Check down and to the right
-					for (int x = move.X + 1, y = move.Y - 1; x <= BOARD_WIDTH && y >= 1 && numConnected <= 4; x++, y--)
-					{
-						var tempCell = new Cell { X = x, Y = y };
-
-						if (BoardState.ContainsKey(tempCell) && BoardState[tempCell] == moveColor)
-						{
-							numConnected++;
-						}
-						else break;
-					}
-
-					//	Check up and to the left
-					for (int x = move.X - 1, y = move.Y + 1; x >= 1 && y <= BOARD_HEIGHT && numConnected <= 4; x--, y++)
-					{
-						var tempCell = new Cell { X = x, Y = y };
-
-						if (BoardState.ContainsKey(tempCell) && BoardState[tempCell] == moveColor)
-						{
-							numConnected++;
-						}
-						else break;
-					}
-				}
-			}
-
-			return numConnected >= 4;
-		}
-
-		private bool GameOver()
-		{
-			//	There are WIDTH x HEIGHT cells to be played.
-			//	The game proceeds (for now) until all cells are occupied.
-
-			var numCellsPlayed = BoardState.Keys.Count;
-
-			if (numCellsPlayed >= (BOARD_WIDTH * BOARD_HEIGHT)) return true;
-			for (var x = 1; x <= 7; x++)
-			{
-				for (var y = 1; y <= 6; y++)
-				{
-					var cell = new Cell { X = x, Y = y };
-
-
-				}
-			}
-			return false;
+			return highestPopulatedCellInColumn < Constants.BOARD_HEIGHT;
 		}
 
 		public string DrawBoard()
@@ -351,6 +195,5 @@ namespace C4Mediator
 
 			return copy;
 		}
-
 	}
 }

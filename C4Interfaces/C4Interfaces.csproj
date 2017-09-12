@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Color.cs" />
     <Compile Include="Cell.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

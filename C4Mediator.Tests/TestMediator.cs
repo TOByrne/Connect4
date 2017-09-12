@@ -4,7 +4,7 @@ using C4Interfaces;
 
 namespace C4Mediator.Tests
 {
-	public class TestMediator : Mediator
+	public class TestReferee : Referee
 	{
 		public static bool Vertical(Dictionary<Cell, Color> state, Cell move)
 		{
@@ -23,9 +23,9 @@ namespace C4Mediator.Tests
 
 		public static void Draw(Dictionary<Cell, Color> state)
 		{
-			for (int y = BOARD_HEIGHT; y > 0; y--)
+			for (int y = Constants.BOARD_HEIGHT; y > 0; y--)
 			{
-				for (int x = 1; x <= BOARD_WIDTH; x++)
+				for (int x = 1; x <= Constants.BOARD_WIDTH; x++)
 				{
 					var cell = new Cell { X = x, Y = y };
 					if (state.ContainsKey(cell))
