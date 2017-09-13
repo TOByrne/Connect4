@@ -44,13 +44,6 @@ namespace Example.Person
 			var r = new Random(DateTime.Now.Millisecond);
 			var availableColumn = r.Next(availableColumns.Count);
 
-			//	Random illegal move
-			var makeIllegalMove = r.Next(100)%100 == 0;
-			if (makeIllegalMove)
-			{
-				return -1;
-			}
-
 			return availableColumns[availableColumn];
 		}
 	}
